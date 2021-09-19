@@ -4,6 +4,6 @@ import App from './App';
 import './style/index.css'
 
 ReactDOM.render(
-  <div className="dark:bg-gray-800 bg-gray-100 h-screen w-full dark:text-white  " ><App/></div>,
+  <div className="dark:bg-gray-800 bg-gray-100 min-h-screen w-full dark:text-white  " ><App/></div>,
   document.getElementById('root')
 );

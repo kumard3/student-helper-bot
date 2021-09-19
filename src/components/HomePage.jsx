@@ -8,7 +8,7 @@ function classNames(...classes) {
 function HomePage() {
 
   return (
-    <div className="w-full  px-2 py-16 sm:px-0">
+    <div className="w-full min-h-screen px-2 py-16 sm:px-0">
       {/* <h1 className="font-bold text-5xl text-center pt-10">
         {" "}
         Student Helper Bot{" "}

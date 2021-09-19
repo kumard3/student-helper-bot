@@ -10,7 +10,7 @@ export default function WebDevelopment() {
         return (
           <div
             className={classNames(
-              "bg-white rounded-xl p-3 m-1",
+              "bg-white dark:bg-gray-600 rounded-xl p-3 m-1",
               "focus:outline-none focus:ring-2 m-1 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60"
             )}
           >
