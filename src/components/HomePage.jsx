@@ -6,7 +6,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 function HomePage() {
-  const basic_styles = `flex items-center justify-center`;
+
   return (
     <div className="w-full  px-2 py-16 sm:px-0">
       {/* <h1 className="font-bold text-5xl text-center pt-10">
@@ -30,7 +30,7 @@ function HomePage() {
         </Link>
       </div> */}
       <Tab.Group>
-        <Tab.List className="flex p-1 bg-gray-800 dark:bg-gray-50 text-black space-x-1 bg rounded-xl">
+        <Tab.List className="flex p-1 bg-gray-800 dark:bg-gray-700 text-black space-x-1 bg rounded-xl">
           <Tab
             className={({ selected }) =>
               classNames(
@@ -50,7 +50,7 @@ function HomePage() {
                 "w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg",
                 "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60",
                 selected
-                  ? "bg-white shadow"
+                  ? "bg-white shadow "
                   : "text-blue-100 hover:bg-white/[0.12] hover:text-white"
               )
             }

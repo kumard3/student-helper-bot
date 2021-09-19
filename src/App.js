@@ -6,7 +6,7 @@ import ResumeData from "./components/ResumeData";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CourseFinder from "./courseFinder/CourseFinder";
 import HomePage from "./components/HomePage";
-import StudentMessage from "./pages/Message";
+
 import StudentMessaging from "./components/MessagingComponent";
 import Nav from "./components/Nav";
 import Addpost from "./components/Addpost";
