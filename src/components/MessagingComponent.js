@@ -1,13 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { db } from "../firebase";
+import { db, storage } from "../firebase";
 import firebase from "firebase";
-
+import Addpost from "./Addpost";
+import { Link } from "react-router-dom";
 
 export default function StudentMessaging({ nameOfExperiment }) {
   const [inputMessage, setInputMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [profileImage, setProfileImage] = useState(null);
+
+  const [profileImageUrl, setProfileImageUrl] = useState("");
+  const [profileImageString, setProfileImageString] = useState("");
+  const [profileImageUploadProgress, setProfileImageUploadProgress] = useState(
+    0
+  );
   const messageEndRef = useRef(null);
+
+  useEffect(() => {
+    setProfileImageString("qwertyuioiuytrewertyuytre");
+  }, []);
+
   useEffect(() => {
     db.collection("messages")
       .orderBy("timeOfMessage", "asc")
@@ -17,6 +30,45 @@ export default function StudentMessaging({ nameOfExperiment }) {
         );
       });
   }, []);
+  const handleProfileUpload = (e) => {
+    if (e.target.files[0]) {
+      setProfileImage(e.target.files[0]);
+    }
+  };
+
+  const profileImageUpload = (e) => {
+    e.preventDefault();
+
+    const uploadProfileImageTask = storage
+      .ref(`profile-images/${profileImageString}`)
+      .put(profileImage);
+
+    uploadProfileImageTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProfileImageUploadProgress(progress);
+      },
+      (error) => {
+        // Error function ...
+        console.log(error);
+        alert(error.message);
+      },
+      () => {
+        // complete function ...
+        storage
+          .ref("profile-images")
+          .child(profileImageString)
+          .getDownloadURL()
+          .then((url) => {
+            setProfileImageUrl(url);
+          });
+      }
+    );
+  };
+  console.log(profileImageUrl);
   const sendMessage = () => {
     db.collection("messages").add({
       nameOfStudent: "Anish",
@@ -36,46 +88,26 @@ export default function StudentMessaging({ nameOfExperiment }) {
   };
 
   return (
-    <div className="w-[400px] bg-white h-[97vh] rounded-[10px] ">
-      <h1 className="flex justify-center align-center p-[10px]">
-        Teacher Name
-      </h1>
-      <div className=" flex flex-col h-[83vh] overflow-scroll">
+    <div className="w-full ">
+      <Link to="/addpost"> <button className="float-left"><h1 className="float-left">Post Something</h1></button></Link>
+      <div className=" flex flex-col ">
         {messages.map((message) => {
+          console.log(message);
           //move to right for student
           return (
-            <div
-              className={` my-2 flex flex-col min-w-[5rem]   h-[5rem] pt-[10px]`}>
-              <h3
-                className="text-white">
+            <div className={` my-2 flex flex-col    pt-[10px]`}>
+              <h3 className="dark:text-white text-black">
                 {message.message.message}
               </h3>
-
-              <span className="relative left-[70%]">
-
-              </span>
+              {profileImageUrl === "" ? (
+                ""
+              ) : (
+                <img className="max-w-[300px]" src={profileImageUrl} />
+              )}
             </div>
           );
         })}
         <div ref={messageEndRef} />
-      </div>
-      <div className="flex w-[95%] p-[2%] justify-center">
-        <input
-          className="border-[1px] border-black relative z-[1] w-full h-[42px] pl-[7px] rounded-[10px] left-[10px] focus:outline-none "
-          type="text"
-          value={inputMessage}
-          placeholder="Enter Your Message Here"
-          onChange={(e) => setInputMessage(e.target.value)}
-        />
-        {messages === "" ? (
-          ""
-        ) : (
-          <div
-            className="relative flex items-center justify-center z-10 right-[22px]"
-            onClick={sendMessage}>
-              <button >send</button>
-          </div>
-        )}
       </div>
     </div>
   );
