@@ -1,81 +1,28 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-// import "../style/homepage.css";
-// const HomePage = () => {
-//   return (
-//     <div className="mainpage">
-//       <section className="section-plans" id="section-plans">
-//         <div className="u-center-text u-margin-bottom-big">
-//           <h1 className="heading">WELCOME TO CYPHEN</h1>
-//         </div>
 
-//         <div className="row">
-//           <div className="col-2-of-3">
-//             <div className="card">
-//               <div className="card__side card__side--front-1">
-//                 <div className="card__title card__title--1">
-//                   <h4 className="card__heading">
-//                     Welcome to the Future Cyphen's ChatBot
-//                   </h4>
-//                 </div>
-
-//               </div>
-//               <div className="card__side card__side--back card__side--back-1">
-//                 <div className="card__cta">
-//                   <div className="card__info">
-//                     <p>
-//                       <Link to="/chat-bot">
-//                         <button className="btn">GO TO CHATBOT</button>
-//                       </Link>
-//                     </p>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-
-//           <div className="col-2-of-3">
-//             <div className="card">
-//               <div className="card__side card__side--front-2">
-//                 <div className="card__title card__title--2">
-//                   <h4 className="card__heading">
-//                     Get ready to find some awesome courses
-//                   </h4>
-//                 </div>
-
-//               </div>
-//               <div className="card__side card__side--back card__side--back-2">
-//                 <div className="card__cta">
-//                   <div className="card__info">
-//                     <Link to="./course-finder">
-//                       <button className="btn">GO TO COURSE FINDER</button>
-//                     </Link>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-//     </div>
-//   );
-// };
-
-// export default HomePage;
 
 import React from "react";
 import { Link } from "react-router-dom";
 function HomePage() {
+  const basic_styles = `flex items-center justify-center`;
   return (
-    <div>
-      <Link to="/chat-bot">
-        {" "}
-        <button className="btn">GO TO CHATBOT</button>
-      </Link>
-      <Link to="./course-finder">
-        {" "}
-        <button className="btn">GO TO COURSE FINDER</button>
-      </Link>
+    <div className={` ${basic_styles} w-full  flex-col h-screen  `}>
+      <h1 className="font-bold text-5xl mt-10"> Student Helper Bot </h1>
+      <div className={` ${basic_styles} w-full h-full `}>
+        <Link to="/chat-bot">
+          <div
+            className={`${basic_styles}  w-96 h-40 bg-white m-1  rounded-xl`}
+          >
+            <button className=" font-bold text-2xl ">GO TO CHATBOT</button>
+          </div>
+        </Link>
+        <Link to="./course-finder">
+          <div
+            className={` ${basic_styles}  w-96 h-40 bg-white  m-1 rounded-xl`}
+          >
+            <button className="font-bold text-2xl">GO TO COURSE FINDER</button>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 }

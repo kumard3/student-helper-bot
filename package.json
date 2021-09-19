@@ -14,13 +14,15 @@
     "react-scripts": "4.0.1",
     "react-simple-chatbot": "^0.6.1",
     "react-to-pdf": "0.0.13",
+    "firebase": "^8.9.1",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test"
+    "start": " TAILWIND_MODE=watch craco start",
+    "build": "GENERATE_SOURCEMAP=false && craco build && rm build/static/js/*.map && rm build/static/css/*.map ",
+    "test": "craco test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
